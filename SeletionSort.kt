@@ -30,19 +30,25 @@ fun ArrayList<Int>.findMin(): Int {
 fun ArrayList<Int>.sortArray(sorted: Sorted): ArrayList<Int>? {
     if (isEmpty()) return null
     val array = arrayListOf<Int>()
-     for(i in indices) {
-        val index = when (sorted) {
-            Sorted.MAX -> {
-                findMax()
-            }
-            Sorted.MIN -> {
-                findMin()
+    when (sorted) {
+        Sorted.MAX -> {
+            for(i in indices) {
+                val index = findMax()
+                array.add(
+                    this[index]
+                )
+                removeAt(index)
             }
         }
-        array.add(
-            this[index]
-        )
-        removeAt(index)
+        Sorted.MIN -> {
+            for(i in indices) {
+                val index = findMin()
+                array.add(
+                    this[index]
+                )
+                removeAt(index)
+            }
+        }
     }
     return array
 }
